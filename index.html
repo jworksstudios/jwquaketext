@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<title>Quake Text: a jQuery + CSS plugin to jumble your text. | jwQuakeText</title>
+
+<script type = "text/javascript" src = "http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type = "text/javascript" src = "js/jwquaketext.js"></script>
+
+<link rel = "stylesheet" type = "text/css" href = "css/jwquaketext.css" />
+
+</head>
+<body>
+
+<div class = "content">
+<div class = "title quake">Quake Text</div>
+<h1 style = "font-size: 20px; text-align: center; margin-top: -15px;">An Ugly, Official Tutorial</h1><hr />
+<span class = "qt quake">QuakeText</span> (or Quake) is a simple way to <span class = "qt quake">jumble</span> up the text in particular elements, or across the board. Nothing fancy and complicated, but it's quick and it works! Simple jQuery-and-CSS-driven.<br /><br />
+At any time while following along you can type into the text box to see the text update in realtime.
+<hr />
+To start, get the jwQuakeText plugin <a href = "js/jwquaketext.js">jwquaketext.js</a> (<a href = "js/jwquaketext.min.js">.min</a>) | 
+(<a href = "jwquaketext-demo-and-tutorial.zip">.zip w/tutorial</a>)<br /><br />
+Next, <span class = "red">link your files as always:</span><br /><br />
+<pre>
+&lt;head&gt;
+  &lt;script type = "text/javascript" src = "http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+  &lt;script type = "text/javascript" src = "js/jwquaketext.js"&gt;&lt;/script&gt;
+  
+  &lt;!-- Link to your own CSS. There is 1 definition that is required. --&gt;
+  &lt;link rel = "stylesheet" type = "text/css" href = "path/to/your/style.css" /&gt;
+&lt;/head&gt;
+</pre>
+
+<span class = "red">(Important)</span> Set the default CSS display behavior.
+<pre>
+/* In your CSS */
+.quake span.quake:nth-child(odd), 
+.quake span.quake:nth-child(even){
+	display: inline-block;
+}
+</pre>
+
+<hr />
+
+Create your div or span element with the <em class = "purple qt quake">quake</em> class. NOTE: Only give the quake class to an element whose total text you want to change.
+<pre>
+// All of the text in a single div
+&lt;div id = "defDisp" class = "quake"&gt;All of the text in here will quake&lt;/div&gt;
+
+or
+
+// Certain key text in a paragraph
+&lt;p&gt;Only pieces of this text will &lt;span class = "quake"&gt;quake&lt;/span&gt; today.&lt;/p&gt;
+</pre>
+
+<hr />
+
+In your script, call the <em>quake()</em> method for the elements using the <em class = "qt purple quake">quake</em> class.
+<pre>
+// A particular ID (that happens to have class quake)
+$("#defDisp").quake();
+	
+or
+
+// Everything with class quake
+$(".quake").quake();
+</pre>
+<hr />
+
+<div id = "titleDef" class = "med quake">Default (Random)</div>
+<div id = "defDisp" class = "quake">This is quake by default. Random character angles. You can set the range of min and max with randomMin and randomMax.
+</div>
+<pre>$("#defDisp").quake();</pre><br />
+<textarea id = "def">This is quake by default. Random character angles. You can set the range of min and max with randomMin and randomMax.</textarea>
+
+<hr />
+
+<div id = "titleNo" class = "med quake">No Random (using CSS)</div>
+<div id = "no_randomDisp" class = "quake">You can turn random off and define the angles in CSS using :even and :odd selectors! 'Evens' and 'Odds' will always be the same. Good for a uniform look throughout the page.
+</div>
+<pre>-Update your CSS. <b class = "red">Use appropriate prefix: -moz-transform, -webkit-transform, etc.</b> -
+.quake span.quake:nth-child(even){display: inline-block; <span class = "red">transform: rotate(-10deg);</span>}
+.quake span.quake:nth-child(odd){display: inline-block; <span class = "red">transform: rotate(10deg);</span>}
+
+-jQuery-
+$("#no_randomDisp").quake({'random' : false});</pre><br />
+
+<textarea id = "no_random">You can turn random off and use what is defined by CSS. 'Evens' and 'Odds' will always be the same. Good for a uniform look throughout the page.</textarea>
+
+<hr />
+
+<div id = "titleUser" class = "med quake">User-Defined</div>
+<div id = "userDisp" class = "quake">You can define your own angles for a specific element without changing CSS. This displays -40 degrees for 'even' characters, 40 degrees for 'odd' characters.
+</div>
+<pre>$("#userDisp").quake({'even' : -40, 'odd' : 40});</pre><br />
+<textarea id = "user"></textarea>
+
+<hr />
+
+You can have fun with Quake Text by having them be event-driven. I've been using text input to change the text in realtime:<br /><br />
+
+<pre>
+-html-
+&lt;div id = "defDisp" class = "quake"&gt;&lt;/div&gt;
+&lt;input type = "text" id = "def" /&gt;
+
+-jQuery-
+$("#def").keyup(function(){
+  // Random text angles by default
+  $("#defDisp").html($(this).val()).quake();
+});
+</pre>
+
+<hr />
+
+<div id = "titleOptions" class = "med quake">Options</div>
+<div id = "optionsDisp" class = "quake">Customize your effects with the supported options:</div>
+<pre>'random' : true,   // Randomize the angle? The values for randomMin and randomMax be used to determine the final rotation angle.
+'randomMin' : -20, // The min rotation angle random rotations. Can be negative.
+'randomMax' : 20,  // The max rotation angle random rotations. Can be negative.
+'even' : null,     // (If not using random) Sets explicit angle for every [even] character in this element.
+'odd' : null       // (If not using random) Sets explicit angle for every [odd] character in this element.</pre>
+
+<hr />
+
+<span style = "font-size: 12px; font-family: arial;">
+
+<h2>Author</h2>
+Written by Jerome "PJ" Williams<br />
+<a href = "http://www.jworksstudios.com">http://www.jworksstudios.com</a><br />
+<a href = "http://www.twitter.com/jworksstudios" target = "_blank">twitter/@JWorksStudios</a><br />
+<a href = "https://plus.google.com/u/0/118037043563801611497" target = "_blank">g+/JWorksStudios</a><br />
+3.3.2013<br /><br />
+
+<h2>Github</h2>
+If you have ideas for improvements, fork it on Github and make it better!<br />
+<a href = "https://github.com/jworksstudios/jwquaketext" target = "_blank">https://github.com/jworksstudios/jwquaketext/</a><br />
+
+<h2>jwQuakeText</b> &lt;EarthquakeText, QuakeText or just Quake&gt;</h2>
+<p>
+jwQakeText is a simple plugin that will jumble your text like an earthquake. <br />
+Features are random (default), CSS defined, or define on-the-fly.<br />
+Use quake to give an element's text a little flair with minimal effort.<br />
+Quake returns "this" so you can chain it to other functions.<br /><br />
+
+NOTE: Try to use plain text inside of elements.<br />
+-	  Text that has inline tags around them (ex: <span style...>This Text</span> will be returned with default attributes.<br />
+-	  If you want to style your element text, use styles on the outside of that element, not inside the tag.<br /><br />
+
+STYLING: You can style the resulting text by using the jwquaketext.css stylesheet.<br /><br />
+
+Free to use and tweak. Leave some credit when you can.
+</p>
+
+</span>
+
+<a href = "http://www.jworksstudios.com/">&copy; JWorks Studios</a> | <a href = "http://www.jworksstudios.com/plugins/">Plugins</a>
+</div>
+</body>
+</html>
+
+<script>	
+
+	$("#def").html($("#defDisp").text());
+	$("#no_random").html($("#no_randomDisp").text());
+	$("#user").html($("#userDisp").text());
+	
+	// Set all .quake elements to use this function to start...
+	$(".quake").quake();
+	$(".title").quake({'even' : -20, 'odd' : 20});
+	$("#defDisp").quake();
+	$("#no_randomDisp").quake({'random' : false});
+	$("#userDisp").quake({'even' : -40, 'odd' : 40});
+	
+	$("#titleDef").quake();
+	$("#titleNo").quake({'random' : false});
+	$("#titleUser").quake({'even' : -40, 'odd' : 40});	
+	
+	// EVENT-DRIVEN
+	// Whenever text is typed in, append the string and then call quake.
+	$("#def").keyup(function(){
+		// Random text angles
+		$("#defDisp").html($(this).val()).quake();
+	});
+	$("#no_random").keyup(function(){
+		// Use the standard CSS
+		$("#no_randomDisp").html($(this).val()).quake({'random' : false});
+	});
+	$("#user").keyup(function(){
+		// Set some user-defined values...
+		$("#userDisp").html($(this).val()).quake({'even' : -40, 'odd' : 40});
+	});	
+</script>

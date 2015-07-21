@@ -1,0 +1,66 @@
+/*Just working with the SPANs I add. You can switch it up and use this for any element.*/
+.quake span.quake:nth-child(odd), 
+.quake span.quake:nth-child(even){
+	display: inline-block;
+	margin: 0px 2px;
+}
+.quake span.quake:nth-child(even){
+	transform: rotate(-10deg);
+	-moz-transform: rotate(-10deg);
+	-ms-transform: rotate(-10deg);
+	-o-transform: rotate(-10deg);
+	-webkit-transform: rotate(-10deg);
+}
+.quake span.quake:nth-child(odd){
+	transform: rotate(10deg);
+	-moz-transform: rotate(10deg);
+	-ms-transform: rotate(10deg);
+	-o-transform: rotate(10deg);
+	-webkit-transform: rotate(10deg);
+}
+
+
+pre{
+	padding: 20px 20px;
+	background: #EFFFFF;
+	overflow: auto;
+	border: 1px dotted black;
+}
+textarea{
+    width: 100%;
+	max-width: 400px;	
+	height: 75px;
+}
+body{
+	width: 100%;
+	max-width: 900px;
+	margin: auto;
+	font-family: arial;
+	font-size: 1.0em;
+	background-image: url('../images/quake-bg.jpg');
+	background-attachment: fixed;
+	background-size: contain;
+}
+.content{background: rgba(255, 255, 255, .97); padding: 20px;}
+hr{
+	margin: 20px 0px;
+	background: #EFEFFF;
+	border: 1px solid #EFEFFF;
+}
+.qt{
+	display: inline: block; 
+	font-size: 20px;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+.rot{
+	font-size: 100px;
+	transform: rotate(90deg);
+}
+
+.red{color: red;}
+.purple{color: purple;}
+
+.title.quake{font-size: 100px; text-align: center; font-family: Times;}
+.med.quake{font-size: 70px; text-align: center;}
