@@ -14,7 +14,8 @@
 <body>
 
 <div class = "content">
-<div class = "title quake">Quake Text</div>
+<div class = "title quake" id = "Graham">Quake Text</div>
+
 <h1 style = "font-size: 20px; text-align: center; margin-top: -15px;">An Ugly, Official Tutorial</h1><hr />
 <span class = "qt quake">QuakeText</span> (or Quake) is a simple way to <span class = "qt quake">jumble</span> up the text in particular elements, or across the board. Nothing fancy and complicated, but it's quick and it works! Simple jQuery-and-CSS-driven.<br /><br />
 At any time while following along you can type into the text box to see the text update in realtime.
@@ -37,7 +38,8 @@ Next, <span class = "red">link your files as always:</span><br /><br />
 /* In your CSS */
 .quake span.quake:nth-child(odd), 
 .quake span.quake:nth-child(even){
-	display: inline-block;
+	display: inline-block;	
+	/*You may even want to add a little L/R margin spacing, too.*/
 }
 </pre>
 
@@ -120,7 +122,15 @@ $("#def").keyup(function(){
 'randomMin' : -20, // The min rotation angle random rotations. Can be negative.
 'randomMax' : 20,  // The max rotation angle random rotations. Can be negative.
 'even' : null,     // (If not using random) Sets explicit angle for every [even] character in this element.
-'odd' : null       // (If not using random) Sets explicit angle for every [odd] character in this element.</pre>
+'odd' : null,      // (If not using random) Sets explicit angle for every [odd] character in this element.
+'xShift' : 2,      // (Random) The max number of pixels the letters will move left/right. Default 2
+'yShift' : 5       // (Random) The max number of pixels the letters will move up/down. Default 5</pre>
+
+<hr />
+
+<div id = "getCreative" class = "med quake">Get Creative</div>
+<pre>// Quake every 20 milleseconds...With a little more shifting!
+var timerHandle = setInterval(function(){$("#getCreative").quake({xShift:15, yShift:15});}, 20);</pre>
 
 <hr />
 
@@ -176,6 +186,9 @@ Free to use and tweak. Leave some credit when you can.
 	$("#titleDef").quake();
 	$("#titleNo").quake({'random' : false});
 	$("#titleUser").quake({'even' : -40, 'odd' : 40});	
+	
+	// Quake every 20 milleseconds...With a little more shifting!
+	var timerHandle = setInterval(function(){$("#getCreative, .title").quake({xShift:15, yShift:15});}, 20);
 	
 	// EVENT-DRIVEN
 	// Whenever text is typed in, append the string and then call quake.

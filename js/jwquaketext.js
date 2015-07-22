@@ -2,7 +2,7 @@
 	jwQuakeText <EarthquakeText, QuakeText or just Quake>
 	
 	Written by Jerome "PJ" Williams
-	3.3.13
+	3.3.2013
 	http://www.jworksstudios.com/plugins/jwquaketext
 	https://github.com/jworksstudios/jwquaketext
 	
@@ -29,7 +29,9 @@
 		'randomMin' : -20, // The min rotation angle random rotations. Can be negative.
 		'randomMax' : 20,  // The max rotation angle random rotations. Can be negative.
 		'even' : null,     // (If not using random) Sets explicit angle for every [even] character in this element.
-		'odd' : null       // (If not using random) Sets explicit angle for every [odd] character in this element.
+		'odd' : null,      // (If not using random) Sets explicit angle for every [odd] character in this element.
+		'xShift' : 2,      // (Random) The max number of pixels the letters will move left/right. Default 2
+		'yShift' : 5       // (Random) The max number of pixels the letters will move up/down. Default 5
 	}, options)
 	
 	return this.each(function(){
@@ -40,7 +42,7 @@
 	// What gets drawn to the screen.
 	var output = "";
 	// In case user-defined values: Even or odd???
-	var isEven = "0";
+	var isEven = 0;
 	
 	for(i = 0; i < length; i++){
 		// Check to see if the input is whitespace. If it's NOT, then append the styling...
@@ -51,14 +53,23 @@
 				// If we're going to go random, then we need to add inline code...
 				var rot = ((Math.random() * def['randomMax'] * 2) + def['randomMin'] + 1) + 'deg';// Calc once, add deg...
 				var trans = 'transform:rotate(' + rot + '); -moz-transform:rotate(' + rot + '); -o-transform:rotate(' + rot + '); -ms-transform:rotate(' + rot + '); -webkit-transform:rotate(' + rot + ');';
-				output += '<span class = "quake" style = "' + trans + '">' + input[i] + '</span>';
+				
+				// Going to put some x/y movement too...
+				var shiftX = (Math.random() * def['xShift']) -def['xShift'];
+				var shiftY = (Math.random() * def['yShift']) -def['yShift'];
+				var shift = 'position: relative; top: ' + shiftY + 'px; left: ' + shiftX + 'px;';
+				output += '<span class = "quake" style = "' + trans + shift + '">' + input[i] + '</span>';
 			}
 			/****** NOT RANDOM ******/
 			else{
 				// Ok, it's not random, but see if we will use the CSS or if we will use userdefined values...
+				var shiftX = (Math.random() * def['xShift']) -def['xShift'];
+				var shiftY = (Math.random() * def['yShift']) -def['yShift'];
+				var shift = 'position: relative; top: ' + shiftY + 'px; left: ' + shiftX + 'px;';
+				
 				/****** NOT RANDOM, USING DEFAULT CSS VALUES ******/
 				if(def['even'] == null || def['odd'] == null)// Use defined CSS values.
-					output += '<span class = "quake">' + input[i] + '</span>';
+					output += '<span class = "quake" style = "' + shift + '">' + input[i] + '</span>';
 				/****** NOT RANDOM, BUT USER-DEFINED VALUES ******/
 				else{// We are NOT random, AND we have values for even and odd. Use them...
 					// Maintain our Even/Odd directions...
@@ -76,6 +87,6 @@
 	}
 	// Now add it back...
 	$(this).html(output);
-	});
-}
+	});	
+  }
 })(jQuery);
