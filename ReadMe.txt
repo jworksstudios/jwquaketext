@@ -1,6 +1,6 @@
 jwQuakeText - A jQuery plugin to jumble your text.
 Jerome "PJ" Williams
-http://JWorksStudios.com/plugins/jwquaketext
+https://JWorksStudios.com/plugins/jwquaketext
 https://github.com/jworksstudios/jwquaketext
 
 You can download and/or follow along with the demo.
